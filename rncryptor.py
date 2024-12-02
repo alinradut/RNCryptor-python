@@ -113,12 +113,12 @@ class RNCryptor(object):
             # data doesn't even match the required header + hmac length
             raise DecryptionError("Invalid length")
 
-        version = data[0]
+        version = data[:1]
         if not version == b'\x03':
             # required version is version 3
             raise DecryptionError("Unsupported version")
 
-        options = data[1]
+        options = data[1:2]
 
         if not options == b'\x01':
             # when using keys options should be `0`
@@ -153,13 +153,13 @@ class RNCryptor(object):
             # data doesn't even match the required header + hmac length
             raise DecryptionError("Invalid length")
 
-        version = data[0]
+        version = data[:1]
 
         if not version == b'\x03':
             # required version is version 3
             raise DecryptionError("Unsupported version")
 
-        options = data[1]
+        options = data[1:2]
 
         if not options == b'\x00':
             # when using keys options should be `0`
